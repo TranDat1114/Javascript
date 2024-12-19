@@ -328,18 +328,21 @@ document.addEventListener('keydown', (event) => {
     }
 });
 
-canvas.addEventListener('click', () => {
-    if (isMenuOpen) {
-        isMenuOpen = false;
-        backgroundMusic.play();
-        return;
-    }
+canvas.addEventListener('pointerdown', () => {
+    event.preventDefault(); // Ngăn cuộn hoặc zoom
+    if (event.isPrimary) { // Chỉ xử lý con trỏ chính
+        if (isMenuOpen) {
+            isMenuOpen = false;
+            backgroundMusic.play();
+            return;
+        }
 
-    if (!isGameOver) {
-        jay.jump();
-        return;
-    } else {
-        restartGame();
+        if (!isGameOver) {
+            jay.jump();
+            return;
+        } else {
+            restartGame();
+        }
     }
 });
 
